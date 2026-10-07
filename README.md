@@ -49,3 +49,7 @@ Calling a REST API with Axios, debouncing user input, lifting state up to share 
 ---
 
 👤 **Tony Mulunda** — [GitHub @Scarface96](https://github.com/Scarface96)
+
+## About This Project
+
+A React application that integrates with the OMDb API to provide interactive movie search and detailed results. It demonstrates REST API integration, asynchronous data handling, React state, component architecture and responsive UI development.
