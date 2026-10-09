@@ -1,33 +1,47 @@
 # 🍿 Movie App
 
-A React app for searching movies and TV shows using the **OMDb API**. Type a title to see matching results, then click any result to see its full details.
+A React app for searching movies and TV shows using the **OMDb API**. Search by title, filter by type and year, open full details with ratings from IMDb, Rotten Tomatoes and Metacritic, and keep a watchlist of what you want to see.
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![styled-components](https://img.shields.io/badge/styled--components-DB7093?style=flat-square&logo=styled-components&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
 ![OMDb API](https://img.shields.io/badge/OMDb_API-F5C518?style=flat-square)
+
+## 🌐 Live Demo
+
+**[scarface96.github.io/movie-app](https://scarface96.github.io/movie-app/)** — rebuilt and redeployed automatically on every push to `main`.
 
 ## ✨ Features
 
-- 🔎 **Live search** — results update as you type
-- 🖼️ **Results grid** — poster, title, year and type (movie / series) for each match
-- 📄 **Details panel** — click a result to see its IMDb rating, rating classification, plot and more
-- ❌ Close the details panel to return to the results
+- 🔎 **Live search** with debouncing and cancelled stale requests
+- 🎛️ **Filters** for movies, series or episodes, and release year
+- ➕ **Show more** pagination with a running count of results
+- 🎬 **Details dialog**: full plot, IMDb / Rotten Tomatoes / Metacritic scores, cast, awards, box office, plus links to the trailer and IMDb
+- 🔖 **Watchlist** saved in your browser, with *watched* tracking and a progress bar
+- 🎲 **Surprise me** opens a random all-time favourite
+- 🔗 **Shareable searches**: the query is kept in the address bar (`?q=batman`)
+- Friendly empty, error and "too many results" states; keyboard and screen-reader friendly dialog (Esc to close, focus returns)
 
 ## 🛠️ Built With
 
-- **React** (hooks)
-- **styled-components**
-- **Axios**
+- **React 18** (hooks, plus a small `useStoredState` custom hook for localStorage)
+- Native `fetch` with `AbortController`
 - **[OMDb API](https://www.omdbapi.com/)**
+- Plain CSS with custom properties
+- **Jest** tests for the API layer (`src/api.test.js`)
+- **GitHub Actions** → GitHub Pages (`.github/workflows/deploy.yml`)
 
 ## 📁 Project Structure
 
 ```
 src/
-├── App.js                           # Header, search box, results grid
+├── App.js                    # Search, filters, results, watchlist views
+├── api.js                    # OMDb calls and error handling
+├── api.test.js               # Tests for api.js
+├── useStoredState.js         # useState that persists to localStorage
 ├── components/
-│   ├── MovieComponent.js            # Single result card
-│   └── MovieInfoComponent.js        # Selected movie details
+│   ├── MovieCard.js          # Poster card with watchlist bookmark
+│   └── MovieDetails.js       # Accessible details dialog
+├── index.css                 # Styles
 └── index.js
 ```
 
@@ -40,11 +54,11 @@ npm install
 npm start
 ```
 
-Get a free API key from [omdbapi.com](https://www.omdbapi.com/apikey.aspx) and set it as `API_KEY` in `src/App.js`.
+The app ships with a demo OMDb key. To use your own, get a free key from [omdbapi.com](https://www.omdbapi.com/apikey.aspx) and start the app with `REACT_APP_OMDB_KEY=yourkey npm start`.
 
 ## 📚 What I Learned
 
-Calling a REST API with Axios, debouncing user input, lifting state up to share the selected movie between components, and building layouts with styled-components.
+Calling a REST API, debouncing and cancelling requests, paginating results, persisting state with a custom hook, building an accessible modal dialog, and deploying with GitHub Actions.
 
 ---
 
